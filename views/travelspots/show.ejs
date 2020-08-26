@@ -1,0 +1,60 @@
+<%- include("../partials/header") %>
+	<div class="row">
+		<!-- <div class="col-md-3">
+			<p class="lead">TravelBlog</p>
+			<div class="list-group">
+				<li class="list-group-item">Info 1</li>
+				<li class="list-group-item">Info 2</li>
+				<li class="list-group-item">Info 3</li>
+			</div>
+		</div> -->
+		<div class="col-md-9" style="position: absolute; left: 20%;">
+			<div style="width: 50rem; align-itms: center" class=card>
+				<img style="width: 50rem" src="<%=travelspot.image %>" class="card-img-top" alt="<%=travelspot.name %>">
+					<div class="card-body">
+						<h5 class="card-title"><%=travelspot.name %></h5>
+						<hr>
+						<p class="card-text"><%=travelspot.description %></p>
+						<p>
+							<em>Submitted By <%= travelspot.author.username %></em>
+						</p>
+						<% if(currentUser && travelspot.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
+						<a class="btn btn-sm btn-warning" href="/travelspots/<%= travelspot._id%>/edit">Edit</a>
+						<form id="delete-form" action="/travelspots/<%= travelspot._id%>?_method=DELETE" method="POST">
+							<button class="btn btn-sm btn-danger">Delete</button>
+						</form>
+						<% } %>
+					</div>
+			</div>
+			<div style="width: 50rem" class="card">
+				<div class="card-body">
+					<div class="text-right">
+						<a class="btn btn-sm btn-success" href="/travelspots/<%= travelspot.id%>/comments/new">Add New Comment</a>
+					</div>
+					<hr>
+					<div class="row">
+					<% travelspot.comments.forEach(function(comment){ %>
+						<div class="col-md-12 mb-2">
+							<div class="card">
+								<div class="card-body">
+									<p class="card-title"><strong><%= comment.author.username %></strong></p>
+							        <p class="card-text"><%= comment.text %></p>
+									<% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+									<a class="btn btn-sm btn-warning" 
+									   href="/travelspots/<%= travelspot._id%>/comments/<%= comment._id%>/edit">Edit</a>
+									<form id="delete-form" action="/travelspots/<%= travelspot._id%>/comments/<%= comment._id%>?_method=DELETE", method="POST">
+										<input type="submit" class="btn btn-sm btn-danger" value="Delete">
+										
+									</form>
+									<%} %>
+								</div>
+							</div>
+						</div>
+					<% }) %>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<%- include("../partials/footer") %>

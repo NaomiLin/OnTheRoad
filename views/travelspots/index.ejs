@@ -1,0 +1,34 @@
+<%- include("../partials/header") %>
+
+	<header class="jumbotron">
+		<div class="container">
+			<h1 style="font-family:'Noto Sans JP', sans-serif">Welcome to On the Road</h1>
+			<p>It’s a great, big world out there with billions and billions of people, who each day live their life and have their own unique experiences.Everyone is on the road to recovery!</p>
+			<p>
+				<a class="btn btn-light btn-sm" href = "/travelspots/new">Share Your Advantures</a>
+			</p>
+		</div>
+	</header>
+
+	<div class="row">
+		<div class="col-md-12">
+			<h4 style="text-align: center; font-family:'Noto Sans JP', sans-serif">Our Most Popular Travel Destinations</h4>
+		</div>
+	</div>
+	
+	<div class="row">
+			<% travelspots.forEach(function(travelspot){ %>
+				<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+					  <div class="card" style="width: 16rem">
+					     <img src="<%=travelspot.image %>" class="card-img-top" alt="<%=travelspot.name %>" style="width: 16rem; height: 11rem">
+						  <div class="card-body">
+							<p style ="font-family:'Noto Sans JP', sans-serif" class="card-title"><%=travelspot.name %></p>
+							  <a href="/travelspots/<%= travelspot._id %>" class="btn btn-info btn-sm">More Info</a>
+						  </div>
+					 </div>
+			    </div>
+			<% }) %>
+	</div>
+	
+<%- include("../partials/footer") %>
+
